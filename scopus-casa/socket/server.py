@@ -92,7 +92,11 @@ def aceitaClientes(celulares,casas):
         
         
         if(int(tipo) == 1):
-            casa = [user,conexao,cliente,0]
+            
+            tamanho = conexao.recv(3)
+            comodos = conexao.recv(int(tamanho))
+            
+            casa = [user,conexao,cliente,0,comodos]
             
             
             casa[3] = threading.Thread(target=(receberEEnviar),args=(casa,celulares))
@@ -106,6 +110,20 @@ def aceitaClientes(celulares,casas):
             
             celulares.append([user,conexao,cliente])
             print('celular - Conectado por',user, cliente)
+            
+            text = ""
+            for casa in casas:
+                if(len(text) > 2):
+                    text += ","
+                text += casa[4]
+                
+            
+            
+            try:       
+                print(text)
+                conexao.send(text+"\n");
+            except socket.error as e:
+                print("Erro")
             
             
             

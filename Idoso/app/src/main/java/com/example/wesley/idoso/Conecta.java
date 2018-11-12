@@ -61,14 +61,14 @@ public class Conecta extends AppCompatActivity implements CustomHandler.AppRecei
         itService.putExtra("handler", new Messenger(handler));
         startService(itService);
 
-        Button stop = (Button) findViewById(R.id.stop);
-
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopService(itService);
-            }
-        });
+//        Button stop = (Button) findViewById(R.id.stop);
+//
+//        stop.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                stopService(itService);
+//            }
+//        });
 
 
     }

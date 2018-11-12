@@ -17,7 +17,7 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-
+import java.util.Arrays;
 
 
 public class ConectaService extends IntentService {
@@ -195,6 +195,7 @@ public class ConectaService extends IntentService {
 
         this.socket = null;
 
+
         while(this.socket == null) {
             try {
 
@@ -224,7 +225,7 @@ public class ConectaService extends IntentService {
 
 
 
-
+        JSONObject obj = null;
 
 
 
@@ -236,9 +237,15 @@ public class ConectaService extends IntentService {
             this.out.print(String.format("%03d", this.user.length()));
             this.out.print(this.user);
 
-
-
             this.out.flush();
+
+
+            message = this.stdIn.readLine();
+
+
+            String[] comodos = message.split(",");
+            Log.e("while", Arrays.toString(comodos));
+
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -16,7 +16,10 @@ def main():
         
         
     for item in settings.cameras:
-            listaCam.append(Camera(item[0],item[1],item[2],item[3],item[4],item[5],item[6],status))
+        listaCam.append(Camera(item[0],item[1],item[2],item[3],item[4],item[5],item[6],status))
+    
+    
+    status.start()
 
 if __name__ == "__main__":
     main()

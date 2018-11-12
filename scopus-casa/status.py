@@ -19,6 +19,7 @@ class Status(object):
         self.tcp = None
         
         
+    def start(self):
         self.carregaStatusthr = threading.Thread(target=(self.carregaStatus),args=())
         self.carregaStatusthr.start()
     
@@ -110,12 +111,23 @@ class Status(object):
                 conected = True
             except socket.error as e:
                 print("Erro ao conectar ::%s",e)
-                time.sleep(5)
+                time.sleep(1)
             
             
         self.tcp.send("1")
         self.tcp.send(str(len(self.settings.cliente)).zfill(3))
         self.tcp.send(self.settings.cliente)
+        
+        
+        
+        text = ""
+        for comodo in self.comodos:
+            if(len(text) > 1):
+                text += ","
+            text += comodo[0]
+        
+        self.tcp.send(str(len(text)).zfill(3))
+        self.tcp.send(text)
         
     
     

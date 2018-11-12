@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50px"
-            android:textSize="50px"
+            android:textSize="25dp"
             android:text="Carregando" />
 
         <TextView
@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="100px"
-            android:textSize="50px"
+            android:textSize="25dp"
             android:text="Mensagem" />
 
         <Button
@@ -35,6 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="150px"
+            android:textSize="18dp"
             android:text="Parar Serviço" />
 
 
