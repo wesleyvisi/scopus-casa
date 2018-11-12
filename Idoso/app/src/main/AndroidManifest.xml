@@ -31,8 +31,7 @@
             android:enabled="true"
             android:exported="false" />
 
-        <activity android:name=".Alerta" />
-        <activity android:name=".tela_alerta"></activity>
+        <activity android:name=".Alerta"></activity>
     </application>
 
 </manifest>

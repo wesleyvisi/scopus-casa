@@ -45,10 +45,11 @@ public class Conecta extends AppCompatActivity implements CustomHandler.AppRecei
         Intent it = getIntent();
         String ip = it.getStringExtra("ip");
         String port = it.getStringExtra("port");
+        String user = it.getStringExtra("user");
 
         this.status = (TextView) findViewById(R.id.status);
         this.mensagem = (TextView) findViewById(R.id.mensagem);
-        status.setText("Conectando a:   "+ip+" : "+port);
+        status.setText("Conectando a: "+user+"  -  "+ip+" : "+port);
 
 
         handler = new CustomHandler(this);
@@ -56,6 +57,7 @@ public class Conecta extends AppCompatActivity implements CustomHandler.AppRecei
         final Intent itService = new Intent(this,ConectaService.class);
         itService.putExtra("ip", ip);
         itService.putExtra("port", port);
+        itService.putExtra("user", user);
         itService.putExtra("handler", new Messenger(handler));
         startService(itService);
 

@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent it = new Intent(view.getContext(), Conecta.class);
                 it.putExtra("ip", ((EditText) findViewById(R.id.ip)).getText().toString());
                 it.putExtra("port", ((EditText) findViewById(R.id.port)).getText().toString());
+                it.putExtra("user", ((EditText) findViewById(R.id.user)).getText().toString());
                 startActivity(it);
             }
         });

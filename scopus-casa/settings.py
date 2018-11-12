@@ -33,7 +33,7 @@ class Settings(object):
                     ],
                     [   #Lista de areas seguras (coordenadas considerando a porcentagen do tamanho da tela)
                         [Settings.SAIDA_CASA,[35,0,55,60]],
-                        [Settings.SAIDA_BANHEIRO,[0,15,42,85]]
+                        [Settings.SAIDA_BANHEIRO,[0,15,62,85]]
                     ]
                 ]#,
 #                 [ 
@@ -77,6 +77,8 @@ class Settings(object):
         self.objetoProporcaoArea = 0.15    #O quanto de um quadrado deve estar dentro do outro para considerar o mesmo quadrado (0 - 1)
         
         
+        self.serverHost = "192.168.1.105"
+        self.serverPort = 5000
         
         
         
