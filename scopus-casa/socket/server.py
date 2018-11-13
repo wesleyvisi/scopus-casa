@@ -38,6 +38,7 @@ def receberEEnviar(casa,casas,celulares):
             casas.remove(casa)
             casa[1].close()
             print(casa[0]+".close()")
+            atualizaComodos(casa[0], casas,celulares)
             ativo = False
             
          
