@@ -7,10 +7,13 @@ from conexoes import Conexoes
 
 
 
+MENSAGEM_COMODOS = 0
+MENSAGEM_STATUS = 1
 
 
 
-def receberEEnviar(casa,celulares):
+
+def receberEEnviar(casa,casas,celulares):
     ativo = True
     data = ""
     erros = 0
@@ -32,6 +35,7 @@ def receberEEnviar(casa,celulares):
         
         
         if(erros > 10):
+            casas.remove(casa)
             casa[1].close()
             print(casa[0]+".close()")
             ativo = False
@@ -82,6 +86,21 @@ def receberEEnviar(casa,celulares):
                         
     
 
+def atualizaComodos(user, casas,celulares):
+    text = ""
+    for casa in casas:
+        if(casa[0] == user):
+            if(len(text) > 2):
+                text += ","
+            text += casa[4]
+                
+    for celular in celulares:
+        if(celular[0] == user):
+            try:       
+                celular[1].send('{"tipo":'+str(MENSAGEM_COMODOS)+',"comodos":"'+text+'"}'+"\n");
+            except socket.error as e:
+                print("")
+    
 def aceitaClientes(celulares,casas):
     while True:
         
@@ -99,10 +118,13 @@ def aceitaClientes(celulares,casas):
             casa = [user,conexao,cliente,0,comodos]
             
             
-            casa[3] = threading.Thread(target=(receberEEnviar),args=(casa,celulares))
+            casa[3] = threading.Thread(target=(receberEEnviar),args=(casa,casas,celulares))
             casa[3].start()
             
             casas.append(casa)
+            
+            atualizaComodos(user, casas,celulares)
+            
             print('Casa - Conectado por',user, cliente)
             
             
@@ -111,19 +133,7 @@ def aceitaClientes(celulares,casas):
             celulares.append([user,conexao,cliente])
             print('celular - Conectado por',user, cliente)
             
-            text = ""
-            for casa in casas:
-                if(len(text) > 2):
-                    text += ","
-                text += casa[4]
-                
-            
-            
-            try:       
-                print(text)
-                conexao.send(text+"\n");
-            except socket.error as e:
-                print("Erro")
+            atualizaComodos(user, casas,celulares)
             
             
             

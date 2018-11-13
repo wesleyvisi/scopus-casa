@@ -35,6 +35,9 @@ public class ConectaService extends IntentService {
     public static final int SAIU_DA_CASA = 4;
     public static final int PODE_ESTAR_NO_BANHEIRO = 5;
 
+    public static final int MENSAGEM_COMODOS = 0;
+    public static final int MENSAGEM_STATUS = 1;
+
 
     String ip;
     int port;
@@ -109,67 +112,90 @@ public class ConectaService extends IntentService {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+
         JSONObject obj = null;
+
+
         while(this.ativo){
             obj = lerSocket();
 
 
-            Log.e("while", String.valueOf(message));
-
-
 
             msg = new Message();
-            msg.obj = "Conectado com: "+this.ip+":"+this.port;
+            msg.obj = obj;
 
-            String comodo = "";
-            int estado = 0;
-
-
-            try {
-                comodo = obj.getString("comodo");
-                estado = obj.getInt("estado");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            switch (estado){
-                case COMODO_VAZIO:
-                    msg.obj = "Comodo vazio";
-                    break;
-                case OBJETO_NO_COMODO:
-                    msg.obj = "Objeto no comodo";
-
-                    break;
-                case PESSOA_NO_COMODO:
-                    msg.obj = "Pessoa no comodo";
-
-                    break;
-                case ALERTA_RISCO:
-                    msg.obj = "SOCORRO!";
-
-                    Intent alerta = new Intent(ConectaService.this, Alerta.class);
-                    startActivity(alerta);
-
-                    break;
-                case SAIU_DA_CASA:
-                    msg.obj = "Saiu de casa";
-
-                    break;
-                case PODE_ESTAR_NO_BANHEIRO:
-                    msg.obj = "Pode estar no banheiro";
-
-                    break;
-            }
 
             msg.what = STATUS_STATUS;
-
-
 
             try {
                 handler.send(msg);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+
+
+            try {
+                if(obj.getInt("tipo") == MENSAGEM_STATUS){
+                    if(obj.getInt("estado") == ALERTA_RISCO){
+                        Intent alerta = new Intent(ConectaService.this, Alerta.class);
+//                        alerta.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(alerta);
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+//
+//            String comodo = "";
+//            int estado = 0;
+//
+//
+//            try {
+//                comodo = obj.getString("comodo");
+//                estado = obj.getInt("estado");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//            switch (estado){
+//                case COMODO_VAZIO:
+//                    msg.obj = "Comodo vazio";
+//                    break;
+//                case OBJETO_NO_COMODO:
+//                    msg.obj = "Objeto no comodo";
+//
+//                    break;
+//                case PESSOA_NO_COMODO:
+//                    msg.obj = "Pessoa no comodo";
+//
+//                    break;
+//                case ALERTA_RISCO:
+//                    msg.obj = "SOCORRO!";
+//
+//
+//
+//                    break;
+//                case SAIU_DA_CASA:
+//                    msg.obj = "Saiu de casa";
+//
+//                    break;
+//                case PODE_ESTAR_NO_BANHEIRO:
+//                    msg.obj = "Pode estar no banheiro";
+//
+//                    break;
+//            }
+//
+//            msg.what = STATUS_STATUS;
+//
+//
+//
+//            try {
+//                handler.send(msg);
+//            } catch (RemoteException e) {
+//                e.printStackTrace();
+//            }
 
         }
 
@@ -239,12 +265,6 @@ public class ConectaService extends IntentService {
 
             this.out.flush();
 
-
-            message = this.stdIn.readLine();
-
-
-            String[] comodos = message.split(",");
-            Log.e("while", Arrays.toString(comodos));
 
         } catch (IOException e) {
             e.printStackTrace();

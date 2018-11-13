@@ -16,7 +16,12 @@ class Settings(object):
     ALERTA_RISCO = 3
     SAIU_DA_CASA = 4
     PODE_ESTAR_NO_BANHEIRO = 5
-    NENHUMA_CASA = 6
+
+    MENSAGEM_COMODOS = 0
+    MENSAGEM_STATUS = 1
+    
+    
+    
     
     def __init__(self):
         
@@ -24,7 +29,6 @@ class Settings(object):
         
         self.cameras = [    #Lista de cameras
                 [ 
-                    "1",    #ID da camera
                     "Sala",     #Nome do comodo
                     "rtsp://192.168.1.109:554/user=admin&password=raspcam&channel=1&stream=0.sdp?",     #IP da camera
                     Settings.ANGULO_CAMERA_270,   #Angulo da camera
@@ -36,20 +40,19 @@ class Settings(object):
                         [Settings.SAIDA_CASA,[35,0,55,60]],
                         [Settings.SAIDA_BANHEIRO,[0,15,62,85]]
                     ]
-                ],
-                [ 
-                    "2",     #ID da camera
-                    "Quarto Rita",      #Nome do comodo
-                    "rtsp://192.168.1.110:554/user=admin&password=raspcam&channel=1&stream=0.sdp?",     #IP da camera
-                    Settings.ANGULO_CAMERA_270,     #Angulo da camera
-                    1,    #proporção da imagem - 1 = largura e altura original, 0.5 metade da largura e metade da altura original
-                    [   #Lista de areas seguras (coordenadas considerando a porcentagen do tamanho da tela)
-                        [0,0,35,100]
-                    ],
-                    [   #Lista de areas seguras (coordenadas considerando a porcentagen do tamanho da tela)
-                         
-                    ]
-                ]
+                ]# ,
+#                 [ 
+#                     "Quarto Rita",      #Nome do comodo
+#                     "rtsp://192.168.1.110:554/user=admin&password=raspcam&channel=1&stream=0.sdp?",     #IP da camera
+#                     Settings.ANGULO_CAMERA_270,     #Angulo da camera
+#                     1,    #proporção da imagem - 1 = largura e altura original, 0.5 metade da largura e metade da altura original
+#                     [   #Lista de areas seguras (coordenadas considerando a porcentagen do tamanho da tela)
+#                         [0,0,35,100]
+#                     ],
+#                     [   #Lista de areas seguras (coordenadas considerando a porcentagen do tamanho da tela)
+#                          
+#                     ]
+#                 ]
             ]   
         
         

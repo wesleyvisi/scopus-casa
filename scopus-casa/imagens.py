@@ -11,9 +11,9 @@ from settings import Settings
 
 class Imagens(object):
     
-    def __init__(self,cameraId,camera, rotacao,proporcao):
+    def __init__(self,comodoNome,camera, rotacao,proporcao):
         
-        self.cameraId = cameraId
+        self.comodoNome = comodoNome
         
         self.stop = False
         
@@ -153,8 +153,8 @@ class Imagens(object):
             
             for contArq in range(0,10):
                 
-                 if(os.path.exists('bg/'+str(self.cameraId)+' - '+str(contArq)+'.jpg')):
-                    bgs.append(cv2.imread('bg/'+str(self.cameraId)+' - '+str(contArq)+'.jpg',cv2.IMREAD_GRAYSCALE))
+                 if(os.path.exists('bg/'+str(self.comodoNome)+' - '+str(contArq)+'.jpg')):
+                    bgs.append(cv2.imread('bg/'+str(self.comodoNome)+' - '+str(contArq)+'.jpg',cv2.IMREAD_GRAYSCALE))
                     altura, largura = bgs[len(bgs)-1].shape[:2]
                     print(str(altura)+"-"+str( largura)+" , "+str(self.alturaImagem)+"-"+str( self.larguraImagem))
                     if(altura != self.alturaImagem | largura != self.larguraImagem):
@@ -204,11 +204,11 @@ class Imagens(object):
         else:
             
             for contArq in range(0,9):
-                if(os.path.exists('bg/'+str(self.cameraId)+' - '+str(8 - contArq)+'.jpg')):
+                if(os.path.exists('bg/'+str(self.comodoNome)+' - '+str(8 - contArq)+'.jpg')):
                     
-                    os.rename('bg/'+str(self.cameraId)+' - '+str(8 - contArq)+'.jpg', 'bg/'+str(self.cameraId)+' - '+str(9 - contArq)+'.jpg')
+                    os.rename('bg/'+str(self.comodoNome)+' - '+str(8 - contArq)+'.jpg', 'bg/'+str(self.comodoNome)+' - '+str(9 - contArq)+'.jpg')
             
-            cv2.imwrite('bg/'+str(self.cameraId)+' - 0.jpg',self.primarybg)
+            cv2.imwrite('bg/'+str(self.comodoNome)+' - 0.jpg',self.primarybg)
             
             
             

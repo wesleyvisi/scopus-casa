@@ -14,7 +14,7 @@ import threading
 class Camera(object):
     
     
-    def __init__(self, id, nome, camera, angulo, proporcao,areasSeguras, saidas, status):
+    def __init__(self, nome, camera, angulo, proporcao,areasSeguras, saidas, status):
         self.id = id
         self.nome = nome
         self.camera = camera
@@ -35,7 +35,7 @@ class Camera(object):
         
         
         print("carregando... ")
-        self.imagens = Imagens(self.id,self.camera, self.angulo, self.proporcao)
+        self.imagens = Imagens(self.nome,self.camera, self.angulo, self.proporcao)
         
         
         
@@ -215,7 +215,6 @@ class Camera(object):
             
             
             
-        video_capture.release()
         cv2.destroyAllWindows()
     
     

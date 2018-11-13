@@ -49,7 +49,7 @@ class Status(object):
             for comodo in self.comodos:
                 if(comodo[1] != comodo[3]):
                     comodo[3] = comodo[1]
-                    text = '{"comodo":"'+comodo[0]+'","estado":'+str(comodo[1])+'}'
+                    text = '{"tipo":"'+str(self.settings.MENSAGEM_STATUS)+'","comodo":"'+comodo[0]+'","estado":'+str(comodo[1])+'}'
                     
                     text2 = "\n"+comodo[0]+": "
                     
