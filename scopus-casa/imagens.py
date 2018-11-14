@@ -55,13 +55,13 @@ class Imagens(object):
         new = cv2.dilate(new, None, iterations=2)
         self.bin = cv2.threshold(new, 50, 255, cv2.THRESH_BINARY)[1]
                 
+        self.pegarBg()
         
         
         
         
     
     def start(self):
-        self.pegarBg()
         
         self.limpabg = threading.Thread(target=self.limpaBg,args=())
         self.limpabg.start()
